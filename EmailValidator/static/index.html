@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Email Validator</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="orb orb-purple"></div>
+    <div class="orb orb-blue"></div>
+
+    <main class="validator-card">
+        <header class="card-header">
+            <div class="logo-wrapper">
+                <i data-lucide="shield-check" class="logo-icon"></i>
+            </div>
+            <h1>Email Validator</h1>
+            <p>Проверка синтаксиса и верификация DNS-домена в реальном времени</p>
+        </header>
+
+        <form id="validatorForm" autocomplete="off" novalidate>
+            <div class="input-wrapper">
+                <i data-lucide="mail" class="input-icon"></i>
+                <input
+                    type="email"
+                    id="emailInput"
+                    placeholder="example@domain.com"
+                    autofocus
+                    required
+                >
+                <div class="live-status" id="liveStatus"></div>
+            </div>
+
+            <button type="submit" id="submitBtn">
+                <span class="btn-text">Проверить адрес</span>
+                <span class="spinner hidden"></span>
+            </button>
+        </form>
+
+        <div class="result-container hidden" id="resultContainer">
+            <div class="result-content">
+                <div class="result-icon-wrapper" id="resultIconWrapper">
+                    <i data-lucide="check" id="successIcon" class="hidden"></i>
+                    <i data-lucide="x" id="errorIcon" class="hidden"></i>
+                </div>
+                <div class="result-text">
+                    <h3 id="resultTitle">Статус</h3>
+                    <p id="resultDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

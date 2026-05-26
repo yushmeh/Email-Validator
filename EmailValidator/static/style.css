@@ -1,0 +1,285 @@
+:root {
+    --bg-color: #030712;
+    --card-bg: rgba(17, 24, 39, 0.65);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-primary: #f9fafb;
+    --text-secondary: #9ca3af;
+
+    --primary-gradient: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
+    --accent-purple: #a855f7;
+    --accent-blue: #3b82f6;
+
+    --success-color: #10b981;
+    --success-bg: rgba(16, 185, 129, 0.1);
+    --success-border: rgba(16, 185, 129, 0.25);
+
+    --error-color: #ef4444;
+    --error-bg: rgba(239, 68, 68, 0.1);
+    --error-border: rgba(239, 68, 68, 0.25);
+
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Эффект светящихся сфер на фоне */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+    animation: pulse 10s infinite alternate;
+}
+
+.orb-purple {
+    width: 400px;
+    height: 400px;
+    background: var(--accent-purple);
+    top: -10%;
+    left: 20%;
+}
+
+.orb-blue {
+    width: 500px;
+    height: 500px;
+    background: var(--accent-blue);
+    bottom: -10%;
+    right: 20%;
+    animation-delay: -5s;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.2) translate(30px, -20px); }
+}
+
+/* Glassmorphism Карточка */
+.validator-card {
+    position: relative;
+    z-index: 1;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    width: 100%;
+    max-width: 480px;
+    padding: 2.5rem;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(168, 85, 247, 0.05);
+    transform: translateY(0);
+    transition: var(--transition-smooth);
+}
+
+.validator-card:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6),
+                0 0 50px rgba(59, 130, 246, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Хедер */
+.card-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo-wrapper {
+    display: inline-flex;
+    padding: 0.85rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    margin-bottom: 1rem;
+    color: var(--accent-purple);
+}
+
+.logo-icon { width: 28px; height: 28px; }
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, #fff, #9ca3af);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.card-header p {
+    color: var(--text-secondary);
+    font-size: 0.925rem;
+    line-height: 1.5;
+}
+
+/* Поле ввода */
+.input-wrapper {
+    position: relative;
+    margin-bottom: 1.25rem;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    width: 20px;
+    height: 20px;
+    transition: var(--transition-smooth);
+    pointer-events: none;
+}
+
+#emailInput {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--card-border);
+    padding: 1rem 1rem 1rem 3rem;
+    border-radius: 14px;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    outline: none;
+    transition: var(--transition-smooth);
+}
+
+#emailInput:focus {
+    border-color: var(--accent-blue);
+    background: rgba(0, 0, 0, 0.35);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15),
+                inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#emailInput:focus + .input-icon {
+    color: var(--accent-blue);
+}
+
+/* Иконка быстрой валидации (на лету) */
+.live-status {
+    position: absolute;
+    right: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    transition: var(--transition-smooth);
+}
+
+/* Кнопка */
+button {
+    width: 100%;
+    background: var(--primary-gradient);
+    border: none;
+    padding: 1rem;
+    border-radius: 14px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.25);
+}
+
+button:hover {
+    opacity: 0.95;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(168, 85, 247, 0.35);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* Спиннер загрузки */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Контейнер результата */
+.result-container {
+    margin-top: 1.5rem;
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.result-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.result-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.result-text h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+}
+
+.result-text p {
+    font-size: 0.85rem;
+    opacity: 0.85;
+}
+
+/* Состояния успеха / ошибки */
+.result-success {
+    background: var(--success-bg);
+    border: 1px solid var(--success-border);
+    color: var(--success-color);
+}
+.result-success .result-icon-wrapper { background: rgba(16, 185, 129, 0.15); }
+
+.result-error {
+    background: var(--error-bg);
+    border: 1px solid var(--error-border);
+    color: var(--error-color);
+}
+.result-error .result-icon-wrapper { background: rgba(239, 68, 68, 0.15); }
+
+/* Служебные утилиты */
+.hidden { display: none !important; }

@@ -1,0 +1,5 @@
+dnspython>=2.6.1
+pytest>=8.0.0
+fastapi
+pydantic
+uvicorn
